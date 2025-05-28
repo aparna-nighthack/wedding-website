@@ -1,0 +1,26 @@
+*** Begin Patch
+*** Update File: /home/ubuntu/aparna/testbot_v1/local_GPT2/SOURCE_DOCUMENTS-991037375/tourism_styles.css
+@@ -0,0 +1,22 @@
++@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800";
++@import "https://fonts.googleapis.com/css?family=Merriweather:300,400,700";
++@import "https://fonts.googleapis.com/css?family=Nunito:300,400,700";
++
++.booking-btn {
++  font-size: 14px;
++  border: solid 2px #e8ca6f;
++  border-radius: 5px;
++  text-transform: uppercase;
++  background-color: #fff;
++  color: #3d4351;
++  padding: 12px 25px;
++  transition: all 300ms ease-in-out;
++}
++
++.booking-btn:hover,
++.booking-btn:focus {
++  background-color: #e8ca6f;
++  color: #fff;
++}
++
++.destination-card { /* Additional styles for destination cards can be added here */ }
+*** End Patch ***

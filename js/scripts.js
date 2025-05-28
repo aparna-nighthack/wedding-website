@@ -1,6 +1,3 @@
-$(document).ready(function () {
-
-    /***************** Waypoints ******************/
 
     $('.wp1').waypoint(function () {
         $('.wp1').addClass('animated fadeInLeft');
@@ -48,12 +45,9 @@ $(document).ready(function () {
         offset: '75%'
     });
 
-    /***************** Initiate Flexslider ******************/
     $('.flexslider').flexslider({
         animation: "slide"
     });
-
-    /***************** Initiate Fancybox ******************/
 
     $('.single_image').fancybox({
         padding: 4
@@ -65,25 +59,18 @@ $(document).ready(function () {
         height: 800
     });
 
-    /***************** Tooltips ******************/
     $('[data-toggle="tooltip"]').tooltip();
 
-    /***************** Nav Transformicon ******************/
-
-    /* When user clicks the Icon */
     $('.nav-toggle').click(function () {
         $(this).toggleClass('active');
         $('.header-nav').toggleClass('open');
         event.preventDefault();
     });
-    /* When user clicks a link */
+
     $('.header-nav li a').click(function () {
         $('.nav-toggle').toggleClass('active');
         $('.header-nav').toggleClass('open');
-
     });
-
-    /***************** Header BG Scroll ******************/
 
     $(function () {
         $(window).scroll(function () {
@@ -116,27 +103,23 @@ $(document).ready(function () {
             }
         });
     });
-    /***************** Smooth Scrolling ******************/
 
     $(function () {
-
         $('a[href*=#]:not([href=#])').click(function () {
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
 
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
-                    $('html,body').animate({
+                    $('html, body').animate({
                         scrollTop: target.offset().top - 90
                     }, 2000);
                     return false;
                 }
             }
         });
-
     });
 
-    /********************** Social Share buttons ***********************/
     var share_bar = document.getElementsByClassName('share-bar');
     var po = document.createElement('script');
     po.type = 'text/javascript';
@@ -155,17 +138,12 @@ $(document).ready(function () {
 
             '<div class="g-plusone" data-size="medium"></div>';
 
-        // '<iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;url=' + encodeURIComponent(window.location) + '" allowtransparency="true" frameborder="0" scrolling="no" title="+1" style="width:105px; height:21px;"></iframe>';
-
         share_bar[i].innerHTML = html;
         share_bar[i].style.display = 'inline-block';
     }
 
-    /********************** Embed youtube video *********************/
     $('.player').YTPlayer();
 
-
-    /********************** Toggle Map Content **********************/
     $('#btn-show-map').click(function () {
         $('#map-content').toggleClass('toggle-map-content');
         $('#btn-show-content').toggleClass('toggle-map-content');
@@ -175,39 +153,22 @@ $(document).ready(function () {
         $('#btn-show-content').toggleClass('toggle-map-content');
     });
 
-    /********************** Add to Calendar **********************/
     var myCalendar = createCalendar({
         options: {
             class: '',
-            // You can pass an ID. If you don't, one will be generated for you
             id: ''
         },
         data: {
-            // Event title
             title: "Ram and Antara's Wedding",
-
-            // Event start date
             start: new Date('Nov 27, 2017 10:00'),
-
-            // Event duration (IN MINUTES)
-            // duration: 120,
-
-            // You can also choose to set an end time
-            // If an end time is set, this will take precedence over duration
             end: new Date('Nov 29, 2017 00:00'),
-
-            // Event Address
             address: 'ITC Fortune Park Hotel, Kolkata',
-
-            // Event Description
             description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
         }
     });
 
     $('#add-to-cal').html(myCalendar);
 
-
-    /********************** RSVP **********************/
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
@@ -230,16 +191,30 @@ $(document).ready(function () {
                 })
                 .fail(function (data) {
                     console.log(data);
-                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server.'));
                 });
         }
     });
 
+    $('#search-bar').on('input', function () {
+        let query = $(this).val().toLowerCase();
+        $('.destination').each(function () {
+            let destinationText = $(this).text().toLowerCase();
+            if (destinationText.includes(query)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    $('.book-now-btn').click(function () {
+        let destinationId = $(this).data('destination-id');
+        alert('Booking for destination ' + destinationId + ' is successful!');
+    });
+
 });
 
-/********************** Extras **********************/
-
-// Google map
 function initMap() {
     var location = {lat: 22.5932759, lng: 88.27027720000001};
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -268,12 +243,10 @@ function initBBSRMap() {
     });
 }
 
-// alert_markup
 function alert_markup(alert_type, msg) {
     return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
 }
 
-// MD5 Encoding
 var MD5 = function (string) {
 
     function RotateLeft(lValue, iShiftBits) {
@@ -488,6 +461,5 @@ var MD5 = function (string) {
     }
 
     var temp = WordToHex(a) + WordToHex(b) + WordToHex(c) + WordToHex(d);
-
     return temp.toLowerCase();
 };
